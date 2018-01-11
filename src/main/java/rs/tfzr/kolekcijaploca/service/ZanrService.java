@@ -9,5 +9,11 @@ import java.util.List;
  */
 public interface ZanrService {
 
-    List<Zanr> nadjiSve();
+    public List<Zanr> nadjiSve();
+
+    public Zanr nadjiJedan(Long id);
+
+    public Zanr sacuvaj(Zanr zanr);
+
+    public void izbrisi(Long id);
 }

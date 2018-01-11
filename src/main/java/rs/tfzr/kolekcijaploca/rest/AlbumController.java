@@ -1,9 +1,9 @@
 package rs.tfzr.kolekcijaploca.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import rs.tfzr.kolekcijaploca.model.Album;
 import rs.tfzr.kolekcijaploca.service.AlbumService;
 
@@ -17,9 +17,35 @@ public class AlbumController {
     private AlbumService albumService;
 
     @RequestMapping(value = "/album", method = RequestMethod.GET)
-    public List<Album> nadjiSveAlbume() {
-        return albumService.nadjiSve();
+    public ModelAndView sveKategorije(Model model) {
+        model.addAttribute("izmeniAlbum", new Album());
+        model.addAttribute("album", albumService.nadjiSve());
+        return new ModelAndView("album");
     }
 
+    @RequestMapping(value = "/album/delete/(albumId)", method = RequestMethod.GET)
+    public String izbrisiAlbum(@PathVariable Long albumId) {
+        albumService.izbrisi(albumId);
+        return "redirect:/album";
+    }
+
+    @RequestMapping(value = "/album/edit/(albumId)", method = RequestMethod.GET)
+    public String izmeniAlbum(@PathVariable Long albumId, Model model) {
+        model.addAttribute("albumZaCuvanje", new Album());
+        model.addAttribute("album", albumService.nadjiJedan(albumId));
+        return "izmeniAlbum";
+    }
+
+    @RequestMapping(value = "/album/save", method = RequestMethod.POST)
+    public String sacuvajAlbum(@ModelAttribute("albumZaCuvanje") Album album) {
+        albumService.sacuvaj(album);
+        return "redirect:/album";
+    }
+
+    @RequestMapping(value = "/album/add", method = RequestMethod.GET)
+    public String dodajAlbum(Model model) {
+        model.addAttribute("album", new Album());
+        return "izmeniAlbum";
+    }
 
 }

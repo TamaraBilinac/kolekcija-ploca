@@ -6,5 +6,13 @@ import rs.tfzr.kolekcijaploca.model.Album;
 import java.util.List;
 
 public interface AlbumService {
-    List<Album> nadjiSve();
+    public List<Album> nadjiSve();
+
+    public Album nadjiJedan(Long id);
+
+
+
+    public Album sacuvaj(Album album);
+
+    public void izbrisi(Long id);
 }
