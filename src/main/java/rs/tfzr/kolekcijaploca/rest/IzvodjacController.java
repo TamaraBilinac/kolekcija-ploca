@@ -24,26 +24,26 @@ public class IzvodjacController {
         return new ModelAndView("izvodjac");
     }
 
-    @RequestMapping(value = "/izvodjac/delete/(izvodjacId)", method = RequestMethod.GET)
+    @RequestMapping(value = "/izvodjac/izbrisi/(izvodjacId)", method = RequestMethod.GET)
     public String izbrisiIzvodjaca(@PathVariable Long zanrId) {
         izvodjacService.izbrisi(zanrId);
         return "redirect:/izvodjac";
     }
 
-    @RequestMapping(value = "/izvodjac/edit/(izvodjacId)", method = RequestMethod.GET)
+    @RequestMapping(value = "/izvodjac/izmeni/(izvodjacId)", method = RequestMethod.GET)
     public String izmeniIzvodjaca(@PathVariable Long izvodjacId, Model model) {
         model.addAttribute("izvodjacZaCuvanje", new Izvodjac());
         model.addAttribute("izvodjac", izvodjacService.nadjiJedan(izvodjacId));
         return "izmeniIzvodjaca";
     }
 
-    @RequestMapping(value = "/izvodjac/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/izvodjac/sacuvaj", method = RequestMethod.POST)
     public String sacuvajIzvodjaca(@ModelAttribute("izvodjacZaCuvanje") Izvodjac izvodjac) {
         izvodjacService.sacuvaj(izvodjac);
         return "redirect:/izvodjac";
     }
 
-    @RequestMapping(value = "/izvodjac/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/izvodjac/dodaj", method = RequestMethod.GET)
     public String dodajIzvodjaca(Model model) {
         model.addAttribute("izvodjac", new Izvodjac());
         return "izmeniIzvodjaca";

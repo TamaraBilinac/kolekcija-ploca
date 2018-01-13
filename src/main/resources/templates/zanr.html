@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Zanrovi</title>
+</head>
+<body>
+    <h1 class="text-center">Zanrovi</h1>
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-hover">
+            <tr>
+                <th>Naziv zanra</th>
+                <th>Obrisi</th>
+                <th>Izmeni</th>
+            </tr>
+            <tbody>
+                <tr th:each="zanr : $(zanrovi)">
+                    <td th:id="ime" th:name="ime" th:text="${zanr.ime}"/>
+                    <td>
+                        <form method="get" th:action="@{'/zanr/izbrisi/' + ${zanr.id}}">
+                            <input type="submit" value="Obrisi zanr" class="btn btn-danger" />
+                        </form>
+                    </td>
+                    <td>
+                        <form method="get" th:action="@{'/zanr/izmeni/' + ${zanr.id}}">
+                            <input type="submit" value="Izmeni zanr" class="btn btn-info" />
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+            <div class="form-group">
+
+            <div class="col-sm-offset-3 col-sm-10">
+                <a th:href="@{/zanr/dodaj"><input type="submit" class="btn btn-info" value="Dodaj novi zanr"/></a>
+            </div>
+            </div>
+        <br />
+    </div>
+</body>
+</html>

@@ -23,26 +23,26 @@ public class ZanrController {
         return new ModelAndView("zanr");
     }
 
-    @RequestMapping(value = "/zanr/delete/(zanrId)", method = RequestMethod.GET)
+    @RequestMapping(value = "/zanr/izbrisi/(zanrId)", method = RequestMethod.GET)
     public String izbrisiZanr(@PathVariable Long zanrId) {
         zanrService.izbrisi(zanrId);
         return "redirect:/zanr";
     }
 
-    @RequestMapping(value = "/zanr/edit/(zanrId)", method = RequestMethod.GET)
+    @RequestMapping(value = "/zanr/izmeni/(zanrId)", method = RequestMethod.GET)
     public String izmeniZanr(@PathVariable Long zanrId, Model model) {
         model.addAttribute("zanrZaCuvanje", new Zanr());
         model.addAttribute("zanr", zanrService.nadjiJedan(zanrId));
         return "izmeniZanr";
     }
 
-    @RequestMapping(value = "/zanr/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/zanr/sacuvaj", method = RequestMethod.POST)
     public String sacuvajZanr(@ModelAttribute("zanrZaCuvanje") Zanr zanr) {
         zanrService.sacuvaj(zanr);
         return "redirect:/zanr";
     }
 
-    @RequestMapping(value = "zanr/add", method = RequestMethod.POST)
+    @RequestMapping(value = "zanr/dodaj", method = RequestMethod.POST)
     public String dodajZanr(Model model) {
         model.addAttribute("zanr", new Zanr());
         return "izmeniZanr";

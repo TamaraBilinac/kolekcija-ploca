@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Albumi</title>
+</head>
+<body>
+<h1 class="text-center">Albumi</h1>
+<div class="col-md-10 col-md-offset-1">
+    <table class="table table-hover">
+        <tr>
+            <th>Izvodjac</th>
+            <th>Naslov</th>
+            <th>Zanr</th>
+            <th>Godina</th>
+            <th>Obrisi</th>
+            <th>Izmeni</th>
+        </tr>
+        <tbody>
+        <tr th:each="album : $(albumi)">
+            <td th:id="izvodjac" th:name="izvodjac" th:text="${album.izvodjac.ime}"/>
+            <td th:id="naziv" th:name="naziv" th:text="${album.naziv}"/>
+            <td th:id="zanr" th:name="zanr" th:text="${album.zanr.ime}"/>
+            <td th:id="godina" th:name="godina" th:text="${album.godina}"/>
+            <td>
+                <form method="get" th:action="@{'/album/izbrisi/' + ${album.id}}">
+                    <input type="submit" value="Obrisi album" class="btn btn-danger" />
+                </form>
+            </td>
+            <td>
+                <form method="get" th:action="@{'/album/izmeni/' + ${album.id}}">
+                    <input type="submit" value="Izmeni album" class="btn btn-info" />
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+
+        <div class="col-sm-offset-3 col-sm-10">
+            <a th:href="@{/album/dodaj"><input type="submit" class="btn btn-info" value="Dodaj novi album"/></a>
+        </div>
+    </div>
+    <br />
+</div>
+</body>
+</html>

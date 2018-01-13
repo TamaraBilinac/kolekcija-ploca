@@ -23,26 +23,26 @@ public class AlbumController {
         return new ModelAndView("album");
     }
 
-    @RequestMapping(value = "/album/delete/(albumId)", method = RequestMethod.GET)
+    @RequestMapping(value = "/album/izbrisi/(albumId)", method = RequestMethod.GET)
     public String izbrisiAlbum(@PathVariable Long albumId) {
         albumService.izbrisi(albumId);
         return "redirect:/album";
     }
 
-    @RequestMapping(value = "/album/edit/(albumId)", method = RequestMethod.GET)
+    @RequestMapping(value = "/album/izmeni/(albumId)", method = RequestMethod.GET)
     public String izmeniAlbum(@PathVariable Long albumId, Model model) {
         model.addAttribute("albumZaCuvanje", new Album());
         model.addAttribute("album", albumService.nadjiJedan(albumId));
         return "izmeniAlbum";
     }
 
-    @RequestMapping(value = "/album/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/album/sacuvaj", method = RequestMethod.POST)
     public String sacuvajAlbum(@ModelAttribute("albumZaCuvanje") Album album) {
         albumService.sacuvaj(album);
         return "redirect:/album";
     }
 
-    @RequestMapping(value = "/album/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/album/dodaj", method = RequestMethod.GET)
     public String dodajAlbum(Model model) {
         model.addAttribute("album", new Album());
         return "izmeniAlbum";

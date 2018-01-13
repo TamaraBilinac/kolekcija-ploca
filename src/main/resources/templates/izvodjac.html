@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Izvodjaci</title>
+</head>
+<body>
+<h1 class="text-center">Izvodjaci</h1>
+<div class="col-md-10 col-md-offset-1">
+    <table class="table table-hover">
+        <tr>
+            <th>Naziv izvodjaca</th>
+            <th>Obrisi</th>
+            <th>Izmeni</th>
+        </tr>
+        <tbody>
+        <tr th:each="izvodjac : $(izvodjaci)">
+            <td th:id="ime" th:name="ime" th:text="${izvodjac.ime}"/>
+            <td>
+                <form method="get" th:action="@{'/izvodjac/izbrisi/' + ${izvodjac.id}}">
+                    <input type="submit" value="Obrisi izvodjaca" class="btn btn-danger" />
+                </form>
+            </td>
+            <td>
+                <form method="get" th:action="@{'/izvodjac/izmeni/' + ${izvodjac.id}}">
+                    <input type="submit" value="Izmeni izvodjaca" class="btn btn-info" />
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+
+        <div class="col-sm-offset-3 col-sm-10">
+            <a th:href="@{/izvodjac/dodaj"><input type="submit" class="btn btn-info" value="Dodaj novog izvodjaca"/></a>
+        </div>
+    </div>
+    <br />
+</div>
+</body>
+</html>
