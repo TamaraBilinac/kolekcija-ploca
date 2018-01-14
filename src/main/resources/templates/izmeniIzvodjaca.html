@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"></meta>
     <title>Izmena zanra</title>
 </head>
 <body>
+<div th:include="index"></div>
 <br />
 <br />
 <div clas="col-md-4 col-md-offset-2">
-    <form class="form-horizontal" method="post" th:object="${zanrZaCuvanje}"
-          th:action="@{'/zanr/sacuvaj'}">
+    <form class="form-horizontal" method="post" th:object="${izodjacZaCuvanje}"
+          th:action="@{'/izvodjac/sacuvaj'}">
         <div class="form-group">
-            <label for="zanr" class="col-sm-2 control-label">Naziv zanra</label>
+            <label for="izvodjac" class="col-sm-2 control-label">Naziv izvodjaca</label>
             <div class="col-sm-10">
                 <input type="text" th:id="ime" th:name="ime" required="true" title="Morate uneti naziv"
-                       th:value="${zanr.ime}" class="form-control" id="zanr" placeholder="Naziv zanra" />
+                       th:value="${izvodjac.ime}" class="form-control" id="izvodjac" placeholder="Naziv izvodjaca" />
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input type="hidden" th:id="id" th:name="id" th:value="${zanr.id}"/>
+                <input type="hidden" th:id="id" th:name="id" th:value="${izvodjac.id}"/>
                 <input type="submit" class="btn btn-success" value="Sacuvaj podatke"/>
             </div>
         </div>

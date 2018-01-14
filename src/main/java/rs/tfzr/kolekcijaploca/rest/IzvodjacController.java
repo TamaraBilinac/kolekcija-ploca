@@ -20,33 +20,33 @@ public class IzvodjacController {
     @RequestMapping(value = "/izvodjac", method = RequestMethod.GET)
     public ModelAndView sveKategorije(Model model) {
         model.addAttribute("izmeniIzvodjaca", new Izvodjac());
-        model.addAttribute("izvodjac", izvodjacService.nadjiSve());
+        model.addAttribute("izvodjaci", izvodjacService.nadjiSve());
         return new ModelAndView("izvodjac");
     }
 
-    @RequestMapping(value = "/izvodjac/izbrisi/(izvodjacId)", method = RequestMethod.GET)
-    public String izbrisiIzvodjaca(@PathVariable Long zanrId) {
-        izvodjacService.izbrisi(zanrId);
-        return "redirect:/izvodjac";
+    @RequestMapping(value = "/izvodjac/izbrisi/{izvodjacId}", method = RequestMethod.GET)
+    public ModelAndView izbrisiIzvodjaca(@PathVariable Long izvodjacId) {
+        izvodjacService.izbrisi(izvodjacId);
+        return new ModelAndView("redirect:/izvodjac");
     }
 
-    @RequestMapping(value = "/izvodjac/izmeni/(izvodjacId)", method = RequestMethod.GET)
-    public String izmeniIzvodjaca(@PathVariable Long izvodjacId, Model model) {
+    @RequestMapping(value = "/izvodjac/izmeni/{izvodjacId}", method = RequestMethod.GET)
+    public ModelAndView izmeniIzvodjaca(@PathVariable Long izvodjacId, Model model) {
         model.addAttribute("izvodjacZaCuvanje", new Izvodjac());
         model.addAttribute("izvodjac", izvodjacService.nadjiJedan(izvodjacId));
-        return "izmeniIzvodjaca";
+        return new ModelAndView("izmeniIzvodjaca");
     }
 
     @RequestMapping(value = "/izvodjac/sacuvaj", method = RequestMethod.POST)
-    public String sacuvajIzvodjaca(@ModelAttribute("izvodjacZaCuvanje") Izvodjac izvodjac) {
+    public ModelAndView sacuvajIzvodjaca(@ModelAttribute("izvodjacZaCuvanje") Izvodjac izvodjac) {
         izvodjacService.sacuvaj(izvodjac);
-        return "redirect:/izvodjac";
+        return new ModelAndView("redirect:/izvodjac");
     }
 
     @RequestMapping(value = "/izvodjac/dodaj", method = RequestMethod.GET)
-    public String dodajIzvodjaca(Model model) {
+    public ModelAndView dodajIzvodjaca(Model model) {
         model.addAttribute("izvodjac", new Izvodjac());
-        return "izmeniIzvodjaca";
+        return new ModelAndView("izmeniIzvodjaca");
     }
 
 }
